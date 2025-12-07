@@ -1,6 +1,6 @@
-import { defineConfig } from 'vite';
-import laravel from 'laravel-vite-plugin';
-import tailwindcss from '@tailwindcss/vite';
+import { defineConfig } from 'vite'
+import laravel from 'laravel-vite-plugin'
+import tailwindcss from '@tailwindcss/vite' //tailwind prebieha vsetky blade subory, hlada css, vite ho preklada a kompiluje
 
 export default defineConfig({
     plugins: [
@@ -10,4 +10,7 @@ export default defineConfig({
         }),
         tailwindcss(),
     ],
-});
+})
+
+
+//

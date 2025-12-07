@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="sk">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Produkty - Revichillin</title>
+    @vite(['resources/css/app.css','resources/js/app.js'])
+</head>
+<body class="bg-black text-white min-h-screen">
+
+<header class="w-full bg-slate-800 rounded-bl-[10px] rounded-br-[10px]">
+    <div class="max-w-8xl mx-auto px-6">
+        <nav class="relative flex flex-col sm:flex-row items-center sm:justify-between h-auto sm:h-20 py-4 sm:py-0">
+            <!-- Left links: stack on small screens -->
+            <div class="flex flex-col sm:flex-row items-center gap-2 sm:gap-5 mb-3 sm:mb-0 w-full sm:w-auto text-center sm:text-left justify-center">
+                <a href="{{ route('produkty') }}" class="px-4 py-2 rounded text-white transition duration-150 transform hover:scale-105 hover:text-yellow-400">Produkty</a>
+                <a href="{{ route('info') }}" class="px-4 py-2 rounded text-white transition duration-150 transform hover:scale-105 hover:text-yellow-400">Info</a>
+                <a href="{{ route('contact') }}" class="px-4 py-2 rounded text-white transition duration-150 transform hover:scale-105 hover:text-yellow-400">Kontakt</a>
+            </div>
+
+            <!-- Centered logo: in-flow on small screens, absolutely centered on sm+ -->
+            <a href="{{ route('start') }}"
+               class="group mx-auto sm:absolute sm:left-1/2 sm:transform sm:-translate-x-1/2 z-50 sm:top-0.5 pointer-events-auto">
+                <img src="{{ asset('image/Revichillin.png') }}"
+                     alt="Revichillin"
+                     class="h-16 sm:h-20 transition-transform duration-200 transform group-hover:scale-135 pointer-events-auto" />
+            </a>
+
+            <!-- Right: Search + Login/Logout - stack under logo on small screens -->
+            <div class="flex flex-col sm:flex-row items-center gap-3 mt-3 sm:mt-0 w-full sm:w-auto justify-center">
+                <form action="#" method="GET" class="flex w-full sm:w-auto">
+                    <label for="search" class="sr-only">Hledat</label>
+                    <input id="search" name="q" type="search"
+                           class="w-full sm:w-56 px-3 py-2 bg-slate-700 placeholder-slate-300 text-white rounded-l-md focus:outline-none focus:ring-2 focus:ring-slate-600"
+                           placeholder="Search...">
+                    <button type="submit" class="px-3 py-2 bg-slate-600 rounded-r-md text-white transition duration-150 transform hover:scale-105 hover:text-slate-200" aria-label="search">🔍</button>
+                </form>
+
+                @auth
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit" class="flex items-center gap-2 px-4 py-2 rounded bg-yellow-400 text-white transition duration-150 transform hover:bg-red-500 hover:scale-105">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M3 10a1 1 0 011-1h8a1 1 0 110 2H4a1 1 0 01-1-1z" />
+                                <path d="M13 5l4 5-4 5V5z" />
+                            </svg>
+                            <span>Logout</span>
+                        </button>
+                    </form>
+                @endauth
+                @guest
+                    <a href="{{ route('login') }}" class="group flex items-center gap-2 px-4 py-2 rounded text-white transition duration-150 transform hover:scale-105">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 fill-current text-white group-hover:text-yellow-400 transition-colors" viewBox="0 0 20 20" >
+                            <path fill-rule="evenodd" d="M10 12a4 4 0 100-8 4 4 0 000 8zm-7 6a7 7 0 0114 0H3z" clip-rule="evenodd" />
+                        </svg>
+                        <span class="transition-colors group-hover:text-yellow-400">Login</span>
+                    </a>
+                @endguest
+            </div>
+        </nav>
+    </div>
+</header>
+
+<!-- Page content -->
+<main class="w-full flex justify-center px-4 py-8">
+    <div class="w-full max-w-[1200px]">
+        <!-- Top panel: page title -->
+
+        <h1 class="text-3xl font-semibold">Produkty</h1>
+
+
+        <!-- Info block -->
+
+        <p class="text-slate-300">Tu nájdete prehľad produktov. Môžete si vybrať kategóriu, zadať cenu, alebo použiť ďalšie filtre nižšie na zúženie výsledkov.</p>
+
+
+        <!-- Filters panel -->
+        <section class="bg-gray-700 rounded-md p-6 shadow-soft">
+            <h2 class="text-xl font-semibold mb-3">Filtre</h2>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+
+
+                <div>
+                    <label class="block text-sm mb-1">Cena od</label>
+                    <input type="number" class="form-input" placeholder="0" />
+                </div>
+
+                <div>
+                    <label class="block text-sm mb-1">Cena do</label>
+                    <input type="number" class="form-input" placeholder="100" />
+                </div>
+
+                <div class="md:col-span-3">
+                    <label class="inline-flex items-center">
+                        <input type="checkbox" class="mr-2" />
+                        <span>Len dostupné</span>
+                    </label>
+                </div>
+
+                <div class="md:col-span-3 flex gap-3">
+                    <button class="btn-primary">Použiť filtre</button>
+                    <button class="px-4 py-2 bg-slate-600 text-white rounded">Vymazať</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="">
+            <h2 class="text-xl font-semibold mb-3">Tu bude grid s produktami</h2>
+            <p class="text-slate-300">Tu sa zobrazia produkty podľa zvolených filtrov.</p>
+        </section>
+
+    </div>
+</main>
+
+</body>
+</html>
