@@ -15,6 +15,10 @@
                 <a href="{{ route('produkty') }}" class="px-4 py-2 rounded text-white transition duration-150 transform hover:scale-105 hover:text-yellow-400">Produkty</a>
                 <a href="{{ route('info') }}" class="px-4 py-2 rounded text-white transition duration-150 transform hover:scale-105 hover:text-yellow-400">Info</a>
                 <a href="{{ route('contact') }}" class="px-4 py-2 rounded text-white transition duration-150 transform hover:scale-105 hover:text-yellow-400">kontakt</a>
+                @auth
+                    @if(auth()->user()->role === 'admin') <a href="{{ route('admin.users') }}" class="px-4 py-2 text-sm text-green-300 transition duration-150 transform hover:scale-125 hover:text-yellow-400"> Používatelia </a>
+                    @endif
+                @endauth
             </div>
 
             <a href="{{ route('start') }}"

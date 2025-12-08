@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\AdminController;
 
 Route::get('/', function () {
     return view('start');
@@ -25,3 +26,10 @@ Route::get('/contact', function () {
 Route::get('/info', function () {
     return view('info');
 })->name('info');
+
+// Admin-only users page delegated to AdminController
+Route::middleware(['auth'])->group(function () {
+    Route::get('/admin/pouzivatelia', [AdminController::class, 'users'])->name('admin.users');
+    Route::patch('/admin/pouzivatelia/{id}/role', [AdminController::class, 'updateRole'])->name('admin.users.update');
+    Route::delete('/admin/pouzivatelia/{id}', [AdminController::class, 'destroy'])->name('admin.users.destroy');
+});

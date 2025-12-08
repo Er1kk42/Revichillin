@@ -26,11 +26,11 @@ class DatabaseSeeder extends Seeder
 
         // Create or update an admin user (idempotent)
         User::updateOrCreate(
-            ['email' => 'admin@example.com'],
+            ['email' => 'admin@gmail.com'],
             [
                 'name' => 'admin1',
-                'email' => 'admin@example.com',
-                'password' => Hash::make('admin'),
+                'email' => 'admin@gmail.com',
+                'password' => Hash::make('admin123'),
                 'role' => 'admin',
                 'email_verified_at' => now(),
             ]
